@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: reactfolio-ingress
+spec:
+  rules:
+  - host: "reactfolio.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: reactfolio-service
+            port:
+              number: 3000

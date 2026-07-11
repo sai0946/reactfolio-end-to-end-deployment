@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactfolio-deployment
+  labels:
+    app: reactfolio
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: reactfoliopod
+  template:
+    metadata:
+      labels:
+        app: reactfoliopod
+    spec:
+      containers:
+      - name: reactfolio
+        image: saighaware01/react-app-deployment:latest
+        ports:
+        - containerPort: 3000
