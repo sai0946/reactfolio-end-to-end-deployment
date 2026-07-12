@@ -300,7 +300,7 @@ Triggers a rolling restart so Kubernetes deploys the updated image.
 
 ---
 
-## Kubernetes Pods
+## Ngrok Tunnel Dashboard
 
 ![ngrok Tunneling](screenshots/09-ngrok-tunneling.jpeg)
 
@@ -334,9 +334,7 @@ During the implementation of this project, several real-world DevOps issues were
 
 | Issue | Cause | Solution |
 |--------|-------|----------|
-| AWS Free Tier account activation issue | AWS account remained in incomplete setup state | Switched to a fully local production-like environment using Minikube and Jenkins |
 | Docker daemon permission denied | Jenkins user was not allowed to access Docker socket | Added Jenkins user to the Docker group and restarted Jenkins |
-| Docker Hub authentication failed | Jenkins was not authenticated with Docker Hub | Logged into Docker Hub and verified repository permissions |
 | Docker push returned **insufficient_scope / authorization failed** | Incorrect repository permissions or authentication | Verified Docker Hub repository name and authenticated Jenkins |
 | Git push authentication failed | GitHub removed password authentication | Generated and used a GitHub Personal Access Token (PAT) |
 | Git push returned HTTP 403 | Repository authentication issue | Updated Git remote credentials and authenticated using PAT |
@@ -348,11 +346,9 @@ During the implementation of this project, several real-world DevOps issues were
 | React application showed blank page through Ingress | SPA routes were not forwarded correctly | Updated Ingress configuration to correctly route React requests |
 | Ingress accessible only inside WSL | Windows hosts file was not mapped | Added local domain mapping where required and validated routing |
 | GitHub Webhook returned HTTP 403 | Jenkins CSRF protection rejected webhook requests | Correctly configured Jenkins webhook endpoint and security settings |
-| GitHub Webhook not triggering Jenkins | Incorrect webhook URL | Updated webhook URL to `/github-webhook/` |
 | Jenkins inaccessible from GitHub | Jenkins running locally | Exposed Jenkins securely using ngrok |
 | ngrok tunnel not persistent | Local tunnel closed with terminal | Ran ngrok in the background while testing |
 | Kubernetes deployment did not refresh application | Deployment continued using existing Pods | Used `kubectl rollout restart deployment` to trigger rolling updates |
-| Jenkins workspace confusion | Understanding where Docker builds occur | Learned that Docker images are built from the Jenkins workspace after Git checkout |
 | ClusterIP understanding | Service was internal only | Introduced Ingress to expose the application using a domain instead of NodePort |
 | Deployment vs Pod confusion | Initially created Pods manually | Switched to Deployments for replica management and self-healing |
 | Jenkins Docker build failures | Docker permissions and workspace understanding | Fixed permissions and validated build context |
